@@ -1,0 +1,98 @@
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MyClog</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="/static/css/styles.min.css">
+    <link rel="stylesheet" href="/static/css/me.css">
+
+</head>
+
+<body>
+    <div>
+        <div class="header-dark">
+    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+        <div class="container"><a href="#" class="navbar-brand">MyClog</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation" class="nav-item"><a href="#" class="nav-link">个人中心</a></li>
+                    <li class="dropdown nav-item"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle nav-link">Dropdown </a>
+                        <div role="menu" class="dropdown-menu"><a role="presentation" href="#" class="dropdown-item">First Item</a><a role="presentation" href="#" class="dropdown-item">Second Item</a><a role="presentation" href="#" class="dropdown-item">Third Item</a></div>
+                    </li>
+                </ul>
+                <form target="_self" class="form-inline mr-auto">
+                    <div class="form-group"><label for="search-field"></label><input type="search" name="search" class="form-control search-field" id="search-field" /></div>
+                </form><span class="navbar-text"><div id="user"></div></span><a id="emm" class="btn btn-light action-button" role="button" href=""><div id="zt"></div></a></div>
+        </div>
+    </nav>
+</div></div>
+    <div>
+        <div class="container">
+            <div class="row" id="secion">
+            </div>
+
+        </div>
+    </div>
+    <div class="footer-basic">
+        <footer>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">TheShow © 2019</p>
+        </footer>
+    </div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                type:'get',
+                url:'/getsecion/',
+                dataType:'json',
+                success:function (resuit) {
+                    $.each(resuit,function (i,secion) {
+                        var sum = '<div class="col-md-3">\n' +
+                    '                    <a href="html/login.html" class="btn btn-light">\n' +
+                    '                        <div class="card img-fluid" style="width:220px">\n' +
+                    '                            <img class="card-img-top" src="../static/img/lm.png" alt="Card image" style="width:100%">\n' +
+                    '                            <div class="card-img-overlay">\n' +
+                    '                                <div class="div">\n'
+
+                        sum = sum + '<h5 class="card-title text-left text-white">'+secion['SName']+'('+secion['SClickConut']+')</h5>\n'+
+                                    '<p class="card-text text-left small p">'+secion['SStatement']+'</p>\n' +
+                                    '<p class="card-text text-left small p">贴子数:'+secion['STopicConut']+'</p>\<n></n>'
+
+                        sum = sum + '</div>\n' +
+                    '                            </div>\n' +
+                    '                      </div>\n' +
+                    '                    </a>    \n' +
+                    '                </div>'
+                    $('#secion').append(sum)
+                        })
+                }
+            });
+            $.ajax({
+                type:'get',
+                url:'/getuser/',
+                dataType:'json',
+                success:function (data) {
+                    $('#user').append(data['UName'])
+
+                    $('#zt').append(data['zt'])
+                    $('#emm').attr('href',data['xw'])
+                }
+            })
+        });
+    </script>
+</body>
+</html>

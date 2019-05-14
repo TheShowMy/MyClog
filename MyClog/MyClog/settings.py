@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'reversion',
+    'app_user',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +126,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+# AUTH_USER_MODEL = 'app_user.BBSUsers'
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'app_user/static')
+]
+
+# STATIC_ROOT = '/home/MyClog/static/'
+# STATIC_ROOT = 'D:/python/clog/MyClog/static'
+
+
+# 发送邮件配置
+
+# smtp服务器配置
+EMAIL_HOST='smtp.163.com'
+# 使用用户设置
+EMAIL_HOST_USER='18308131833@163.com'
+# 用户密码设置 推荐使用用户授权码
+EMAIL_HOST_PASSWORD='theshow123'
+# 服务器端口设置
+EMAIL_PORT=465
+# 隐式传递
+EMAIL_USE_SSL=True
+# 设置默认用户
+DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
